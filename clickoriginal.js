@@ -18,24 +18,54 @@ const response = await fetch(url);
 
 // a cross reference of area names to text to be shown for each area
 const xref = {
-    carrots: "<b>Carrots</b> are delicious and may turn your skin orange!",
-    asparagus: "<b>Asparagus</b> is one of the first vegetables of the spring. " 
-        +"Being a dark green, it's great for you, and has interesting side effects.",
-    squash: "<b>Squash</b> is a winter vegetable, and not eaten raw too much. Is that really squash?",
+   
+    heart: {
+        id: "wd:Q190805",
+        content: "<b>heart</b> is broken"
+    },
+
     brain: {
         id: "wd:Q576349",
         content: "<b>brain</b> are actually the same as green peppers, they've just been left on "
         +"the vine longer. Delicious when fire-roasted."
 
 
-    } ,
-    yellowpepper: "Similar to red peppers, <b>yellow peppers</b> are sometimes sweeter.",
-    celery: "<b>Celery</b> is a fascinating vegetable. Being mostly water, it actually takes your body "
-        +"more calories to process it than it provides.",
-    cucumbers: "<b>Cucumbers</b> are cool.",
-    broccoli: "<b>Broccoli</b> is like a forest of goodness in your mouth. And very good for you. "
-        +"Eat lots of broccoli!",
-    dip: "Everything here is good for you but this one. <b>Don't be a dip!</b>" 
+    },
+
+    lung: {
+        id: "wd:Q3392853",
+        content: "<b>lung</b> are infected with COVID-19"
+
+    },
+
+
+
+    knee: {
+        id: "wd:Q18971535",
+        content: "<b>knee</b> is very fat."
+    },
+
+    reproductivesystem: {
+
+         id: "wd:Q7314317",
+         content: "<b>reproductive system </b>  male or female ."
+
+    },
+
+    liver: {
+
+         id: "wd:Q929737",
+         content: "<b>liver </b>  is damaged by alcohol"
+
+    },
+
+    stomach: {
+        id:"wd:Q175827",
+        content: "<b>stomach </b> is empty"
+
+
+    }
+    
 };
 
 
