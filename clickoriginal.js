@@ -29,13 +29,12 @@ const xref = {
 
     Brain: {
         id: "wd:Q576349",
-        content: "<b>brain</b> are actually the same as green peppers, they've just been left on "
-        +"the vine longer. Delicious when fire-roasted."
+        content: "<b>brain</b> is dumb."
 
 
     },
 
-    lung: {
+    Lung: {
         id: "wd:Q3392853",
         content: "<b>lung</b> are infected with COVID-19"
 
@@ -43,12 +42,12 @@ const xref = {
 
 
 
-    knee: {
+    Knee: {
         id: "wd:Q18971535",
         content: "<b>knee</b> is very fat."
     },
 
-    reproductivesystem: {
+    Reproductivesystem: {
 
          id: "wd:Q7314317",
          content: "<b>reproductive system </b>  male or female ."
@@ -69,7 +68,7 @@ const xref = {
 
     },
 
-    skin: {
+    Skin: {
        id: "wd:Q949302",
        content: "<b>skin </b> is scratched"
 
@@ -78,6 +77,12 @@ const xref = {
     Intestine: {
         id: "wd:Q3055380",
         content: "<b>intestines </b> is scrad"
+    },
+
+    Bones: {
+        id:"wd:Q4941552",
+        content: "<b>intestines </b> is scrad"
+
     }
     
 };
