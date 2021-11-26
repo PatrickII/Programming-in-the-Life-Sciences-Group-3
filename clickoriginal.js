@@ -1,30 +1,33 @@
 const performQuery=async(wikidataId)=> {
 
- wd = 'wd:Q576349.'
-    query = 'SELECT DISTINCT ?brain_disease ?brain_diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?brain_disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?brain_disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}'
+
+   query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } }' 
+
+    /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */
     const url = wdk.sparqlQuery(query)
-const response = await fetch(url);
-      const results = await response.json();
-      const simpleResults = wdk.simplify.sparqlResults(results);
-      data =  JSON.stringify(simpleResults, undefined, 0);
+    const response = await fetch(url);
+    const results = await response.json();
+    const simpleResults = wdk.simplify.sparqlResults(results);
+      data =  JSON.stringify(simpleResults, undefined, 2); 
       object = JSON.parse(data)
 
-    
-      console.log(object)
-      console.log(object[0]['brain_disease']['label'])
+      console.log(object)  
+      /* return object           /* this is not getting returned */
 
-
+      
    }
+
+    /*  console.log( await performQuery()) ;    /* what is "await " for ? */
 
 // a cross reference of area names to text to be shown for each area
 const xref = {
    
-    heart: {
+    Heart: {
         id: "wd:Q190805",
-        content: "<b>heart</b> is broken"
+        content: "fuuuuuuuuucckkkk"
     },
 
-    brain: {
+    Brain: {
         id: "wd:Q576349",
         content: "<b>brain</b> are actually the same as green peppers, they've just been left on "
         +"the vine longer. Delicious when fire-roasted."
@@ -52,21 +55,34 @@ const xref = {
 
     },
 
-    liver: {
+    Liver: {
 
          id: "wd:Q929737",
          content: "<b>liver </b>  is damaged by alcohol"
 
     },
 
-    stomach: {
+    Stomach: {
         id:"wd:Q175827",
         content: "<b>stomach </b> is empty"
 
 
+    },
+
+    skin: {
+       id: "wd:Q949302",
+       content: "<b>skin </b> is scratched"
+
+    },
+
+    Intestine: {
+        id: "wd:Q3055380",
+        content: "<b>intestines </b> is scrad"
     }
     
 };
+
+
 
 
 const image = $('#body_img');
@@ -85,10 +101,13 @@ image.mapster(
     onClick: function (e) {
         
         // update text depending on area selected
-        $('#selections').html(xref[e.key].content);
+        $('#selections').html(xref[e.key].content); 
         performQuery(xref[e.key].id)
+      /*  function askStefan(){insert answer} */
+
+       /*  $('#selections2').performQuery(xref[e.key].id.object);  */
     },
-    areas: [
+    /*areas: [
         {
             key: "brain",
             fillColor: "ffffff"
@@ -105,5 +124,5 @@ image.mapster(
             key: "asparagus",
             strokeColor: "FFFFFF"
         } 
-        ]
+        ]                    what was this part for ? */
 });
