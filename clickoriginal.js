@@ -1,4 +1,5 @@
-const performQuery=async(wikidataId)=> {
+let queryData = [];
+async function performQuery(wikidataId) {
 
 
     query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } }' 
@@ -10,33 +11,61 @@ const performQuery=async(wikidataId)=> {
      const simpleResults = wdk.simplify.sparqlResults(results);
        data =  JSON.stringify(simpleResults, undefined, 2); 
        object = JSON.parse(data)
- 
-       console.log(object)  
+     queryData = simpleResults
+      /* console.log(object)  
        /* return object           /* this is not getting returned */
- 
+       console.log(queryData[0]["disease"]["label"])
+    return await queryData
        
     }
- 
+
+
      /*  console.log( await performQuery()) ;    /* what is "await " for ? */
  
  // a cross reference of area names to text to be shown for each area
+(async()=>{
+
+    await performQuery("wd:Q190805")
+    performQuery("wd:Q190805")
+    heart = queryData[0]["disease"]["label"];
+
+    await performQuery("wd:Q576349")
+    performQuery("wd:Q576349")
+    brain = queryData[0]["disease"]["label"];
+
+    await performQuery("wd:Q3392853")
+    performQuery("wd:Q3392853")
+    lung = queryData[0]["disease"]["label"];
+
+    await performQuery("wd:Q18971535")
+    performQuery("wd:Q18971535")
+    reproductivesystem = queryData[0]["disease"]["label"];
+
+    await performQuery("wd:Q929737")
+    performQuery("wd:Q929737")
+    liver = queryData[0]["disease"]["label"];
+
+    await performQuery("wd:Q175827")
+    performQuery("wd:Q175827")
+    stomach = queryData[0]["disease"]["label"];
+
  const xref = {
     
      Heart: {
          id: "wd:Q190805",
-         content: "fuuuuuuuuucckkkk"
+         content:  heart
      },
  
      Brain: {
          id: "wd:Q576349",
-         content: "<b>brain</b> is dumb."
+         content: brain
  
  
      },
  
      Lung: {
          id: "wd:Q3392853",
-         content: "<b>lung</b> are infected with COVID-19"
+         content: lung
  
      },
  
@@ -50,20 +79,20 @@ const performQuery=async(wikidataId)=> {
      Reproductivesystem: {
  
           id: "wd:Q7314317",
-          content: "<b>reproductive system </b>  male or female ."
+          content: reproductivesystem
  
      },
  
      Liver: {
  
           id: "wd:Q929737",
-          content: "<b>liver </b>  is damaged by alcohol"
+          content: liver
  
      },
  
      Stomach: {
          id:"wd:Q175827",
-         content: "<b>stomach </b> is empty"
+         content: stomach
  
  
      },
@@ -106,8 +135,9 @@ const performQuery=async(wikidataId)=> {
      onClick: function (e) {
          
          // update text depending on area selected
+         console.log(queryData)
          $('#selections').html(xref[e.key].content); 
-         performQuery(xref[e.key].id)
-       
+        
          
-     }});
+     }})
+    })();
