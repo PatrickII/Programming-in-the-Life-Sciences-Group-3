@@ -5,10 +5,11 @@
 let queryData=[];
 async function performQuery(wikidataId) {
 
+    query= 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease  wdt:P279*'  + wikidataId + '; wdt:P924 ?possible_treatment. ?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\')?possible_treatment rdfs:label ?possible_treatmentLabel.filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } LIMIT 6'
 
-   query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } LIMIT 6' 
+   /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } LIMIT 6'     complicated query*/ 
 
-    /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */
+   /* query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */    // this query does not manually assign labels 
     const url = wdk.sparqlQuery(query)
     const response = await fetch(url);
     const results = await response.json();
@@ -16,17 +17,17 @@ async function performQuery(wikidataId) {
       data =  JSON.stringify(simpleResults, undefined, 0);     /* 2  NOT USING THIS ?!  --> number to determine white space into output of JSON string, doesn't seem to change anything in output on console ?' */ 
       object = JSON.parse(data)    /*  resolve data into its components parts */ 
      
-     /* console.log(simpleResults)   gives same output as object   ?? */
+     /* console.log(simpleResults)   gives same output as object   ?? */    
 
    
-  
+       console.log(simpleResults);   /* to view whole arrays 
     
       //for (let step = 0; step < 6; step++) {
   // Runs n times, with values of step 0 through length of simpleresults -1 .
   
    for (let step = 0; step < simpleResults.length-1; step++) {
   // Runs 6 times, with values of step 0 through 5.
-  /*console.log(simpleResults[step]["disease"]["label"]); */
+  console.log(simpleResults[step]["disease"]["label"]); 
   queryData.push(simpleResults[step]["disease"]["label"]);  
   
       }
