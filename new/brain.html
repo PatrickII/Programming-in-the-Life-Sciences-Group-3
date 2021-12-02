@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+    <meta name = 'view' content="width = device-width, initial-scale = 1.0">
+    <link rel = "stylesheet" href = styles.css>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikibase-sdk.min.js"></script>
+    <!-- Initialize a global wdk object using the WBK object -->
+    <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikidata-sdk.min.js"></script>
+    <script src="clickoriginal.js"> </script>
+    <script>
+        var brain = [];
+        
+        (async() => {
+           list = [];
+           await performQuery("wd:Q576349");
+           var i = 0;
+           while (i != 6) {
+                brain.push(list[i]);
+                i++;
+           }
+           
+           document.getElementById("dis1").innerHTML = brain[0]['disease']
+           document.getElementById('disp1').innerHTML = brain[0]['treatments']
+           document.getElementById("dis2").innerHTML = brain[1]['disease']
+           document.getElementById('disp2').innerHTML = brain[1]['treatments']
+           document.getElementById("dis3").innerHTML = brain[2]['disease']
+           document.getElementById('disp3').innerHTML = brain[2]['treatments']
+           
+       })();             
+   </script>
+</head>
+<body>
+    <section class="header">
+
+        <nav>
+            <a href="Website.html"><img src="C:/Users/Asus/Desktop/PILS/Images/LogoMakr.png"></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="Website.html">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+      <div class='text-box'>
+          <h1>PILS</h1>
+          <h2>The Brain</h2>
+          <p>Minus rerum cum saepe iusto aliquam. Dolores placeat eligendi nihil non neque qui molestias. Eum quis veniam ex asperiores praesentium qui aperiam. Sit repellendus ipsa velit incidunt ab ipsum. Quia cupiditate voluptatibus omnis omnis ipsa ratione. Molestias ea est ut similique non dolore.</p>
+      </div>
+
+    </section>
+    <section class="brain">
+        <h1>Does this work?</h1>
+        <div class="row1">
+            <div class="column1">
+
+            </div>
+        </div>
+        <div class="row1">
+            <div class="columnA">
+                <div class="c">
+                <input type="checkbox" id="faq-1">
+                <h1 id = 'dis1'><label for="faq-1">Disease 1</label></h1>
+                <div class="p">
+                    <p id = 'disp1'>Dont catch this.</p>
+                </div>
+                </div>
+                <div class="c">
+                <input type="checkbox" id="faq-2">
+                <h1 id = "dis2"><label for="faq-2">Disease 2</label></h1>
+                <div class="p">
+                    <p id="disp2">Pray you get this</p>
+                </div>
+                </div>
+                <div class="c">
+                <input type="checkbox" id="faq-3">
+                <h1 id = "dis3"><label for="faq-3">Disease 3</label></h1>
+                <div class="p">
+                    <p id="disp3">Pretty much cancer. 
+                    </p>
+                </div>
+                </div>
+            </div>
+            <div class="columnB">
+                <img src="C:\Users\Asus\Desktop\PILS\Images\Inkedhuman-brain-illustration.jpg">
+            </div>
+            <div class="columnC">
+                <div class="c">
+                    <input type="checkbox" id="faq-1">
+                    <h1><label for="faq-1">Disease 4</label></h1>
+                    <div class="p">
+                        <p>You are dead if you get this</p>
+                    </div>
+                    </div>
+                    <div class="c">
+                    <input type="checkbox" id="faq-2">
+                    <h1><label for="faq-2">Disease 5</label></h1>
+                    <div class="p">
+                        <p>Yes with pure CSS and HTML.</p>
+                    </div>
+                    </div>
+                    <div class="c">
+                    <input type="checkbox" id="faq-3">
+                    <h1><label for="faq-3">Last One</label></h1>
+                    <div class="p">
+                        <p>I was inpired by an article on css-tricks. <a href="https://css-tricks.com/the-checkbox-hack/">link to article</a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+            
+            
+    </section>
+
+</body>
