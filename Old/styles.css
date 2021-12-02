@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+
+
+
+.header{
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: #a1d6ce; 
+    background-position: center;
+    background-size: cover;
+    padding: 20px 10px;
+    position: relative;
+
+}
+nav{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img{
+    width: 80px;
+
+}
+
+.nav-links{
+    flex: 1;
+    text-align: right;
+
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 10px 12px;
+    position: relative;
+
+}
+.nav-links ul li a{
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav-links ul li::after{
+    content:"" ;
+    width: 0%;
+    height: 2px;
+    background: white;
+    display: block;
+    margin: auto;
+    transition: 0.3s;
+
+
+} 
+.nav-links ul li:hover::after{
+    width: 100%;    
+}
+
+.text-box{
+    width: 90%;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    
+
+}
+
+.text-box h1{
+    font-size: 20px;
+    font-style: italic;
+}
+
+.text-box h2{
+    font-size: 50px;
+}
+
+.text-box p{
+    margin: 10px 0 40px;
+    font-size: 15px;
+}
+
+
+/*----------mainimage---------------*/
+
+.main{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h1{
+    font-size: 40px;
+    font-weight: 600;
+
+}
+
+p{
+    color: gray;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+human{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+human img{
+    width: 1000px;
+    /*align-content: center;*/
+}
+
+/*-------------about us--------*/
+
+.a-header{
+    height: 50vh;
+    width: 100%;
+    background-color: darkturquoise;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: black;
+
+
+}
+
+/*--------------contact us ------------*/
+
+.c-header{
+    height: 50vh;
+    width: 100%;
+    background-image:linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url(C:\Users\Asus\Desktop\PILS\Images\pexels-negative-space-33999.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: black;
+
+}
+.location{
+    width: 80%;
+    margin: auto;
+    padding: 80px 0;
+
+}
+.location iframe{
+    width: 100%;
+}
+
+.contact-us{
+    width: 80%;
+    margin: auto;
+
+}
+
+.contact-col{
+    flex-basis: 48%;
+    margin-bottom: 30px;
+
+
+}
+.contact-col div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+
+}
+.contact-col div .fas{
+    color: black;
+}
+
+
