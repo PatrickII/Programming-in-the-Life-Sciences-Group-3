@@ -82,6 +82,27 @@ async function performQuery(wikidataId) {
     await performQuery("wd:Q175827")
     stomach = queryData[0]["disease"]["label"];
 
+    list = [];
+    await performQuery("wd:Q949302")
+    skin= JSON.stringify(queryData, undefined,0);
+    queryData=[];
+
+    list = [];
+    await performQuery("wd:Q4941552")
+    bones=JSON.stringify(queryData,undefined,0);
+    queryData=[];
+
+    list = [];
+    await performQuery("wd:Q18971535")
+    knee=JSON.stringify(queryData,undefined,0);
+    queryData=[];
+
+    list = [];
+    await performQuery("wd:Q3055380")
+    intestine=JSON.stringify(queryData,undefined,0);
+    queryData=[];
+
+
  const xref = {
     
      Heart: {
