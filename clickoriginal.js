@@ -2,8 +2,7 @@ let queryData = [];
 let list = []; 
 async function performQuery(wikidataId) {
 
-    query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } }' 
- 
+    query= 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease  wdt:P279*'  + wikidataId + '; wdt:P924 ?possible_treatment. ?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\')?possible_treatment rdfs:label ?possible_treatmentLabel.filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } ORDER BY asc(?diseaseLabel)'
      /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */
      const url = wdk.sparqlQuery(query)
      const response = await fetch(url);
@@ -13,7 +12,8 @@ async function performQuery(wikidataId) {
        object = JSON.parse(data)*/
 
        /*Loop over query results and create an object for each disease with an array of treatments*/
-     const object0 = 
+       let j=0;
+       const object0 = 
        {
         disease: simpleResults[0]["disease"]["label"],
         treatments: [simpleResults[0]["possible_treatment"]["label"]]
@@ -21,29 +21,32 @@ async function performQuery(wikidataId) {
        list.push(object0)
        for(let i = 1; i < simpleResults.length; i++)
        {
-            for(let j = 0; j < list.length; j++)
+            while ( j < list.length)
             {
                 if(simpleResults[i]["disease"]["label"]===list[j]["disease"])
                 {
                     list[j]["treatments"].push(simpleResults[i]["possible_treatment"]["label"])
                     break;
                 }
-                else
+                else    
                 {
                     const object = {
                         disease: simpleResults[i]["disease"]["label"],
                         treatments: [simpleResults[i]["possible_treatment"]["label"]]
                     }
                     list.push(object)
+                  
+                    j++;
                     break;
                 }
             }
        }
        console.log(list)
-       queryData = simpleResults
+
+       queryData = simpleResults 
     
 
-    return await queryData, list
+    return await queryData, list 
        
     }
 
@@ -54,8 +57,7 @@ async function performQuery(wikidataId) {
 (async()=>{
     list = [];
     await performQuery("wd:Q190805")
-    heart = queryData[0]["disease"]["label"];
-
+    heart = list;
 
     list = [];
     await performQuery("wd:Q576349")
@@ -66,34 +68,68 @@ async function performQuery(wikidataId) {
     lung = queryData[0]["disease"]["label"];
 
     list = [];
-    await performQuery("wd:Q18971535")
+    await performQuery("wd:Q7314317")
     reproductivesystem = queryData[0]["disease"]["label"];
+
+    /*list = [];
+    await performQuery("")
+    rectum = list;*/
 
     list = [];
     await performQuery("wd:Q929737")
-    liver = queryData[0]["disease"]["label"];
+    liver = list;
 
     list = [];
     await performQuery("wd:Q175827")
-    stomach = queryData[0]["disease"]["label"];
+    stomach = list;
 
+    list = [];
+    await performQuery("wd:Q5282137")
+    foot = list;
+
+    list = [];
+    await performQuery("wd:Q3055380")
+    intestine = list;
+
+    list = [];
+    await performQuery("wd:Q190805")
+    trachea = list;
+
+    list = [];
+    await performQuery("wd:Q190805")
+    ear = list;
+
+    list = [];
+    await performQuery("wd:Q190805")
+    arm = list;
+
+    list = [];
+    await performQuery("wd:Q190805")
+    eye = list;
+
+    list = [];
+    await performQuery("wd:Q190805")
+    mouth = list;
+
+
+/*
  const xref = {
     
      Heart: {
          id: "wd:Q190805",
-         content:  heart
+         content:  heart[0]["disease"]
      },
  
      Brain: {
          id: "wd:Q576349",
-         content: brain
+         content: brain[0]["disease"]
  
  
      },
  
      Lung: {
          id: "wd:Q3392853",
-         content: lung
+         content: lung[0]["disease"]
  
      },
  
@@ -107,20 +143,20 @@ async function performQuery(wikidataId) {
      Reproductivesystem: {
  
           id: "wd:Q7314317",
-          content: reproductivesystem
+          content: reproductivesystem[0]["disease"]
  
      },
  
      Liver: {
  
           id: "wd:Q929737",
-          content: liver
+          content: liver[0]["disease"]
  
      },
  
      Stomach: {
          id:"wd:Q175827",
-         content: stomach
+         content: stomach[0]["disease"]
  
  
      },
@@ -142,7 +178,7 @@ async function performQuery(wikidataId) {
  
      }
      
- };
+ };*/
  
  
  
@@ -160,12 +196,12 @@ async function performQuery(wikidataId) {
      singleSelect: true,
      mapKey: 'name',
      listKey: 'name',
-     onClick: function (e) {
+     /*onClick: function (e) {
          
          // update text depending on area selected
          
          $('#selections').html(xref[e.key].content); 
         
          
-     }})
+     }*/})
     })();
