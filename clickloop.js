@@ -2,8 +2,8 @@ let queryData = [];
 let list = []; 
 async function performQuery(wikidataId) {
 
-    query= 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease  wdt:P279*'  + wikidataId + '; wdt:P924 ?possible_treatment. ?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\')?possible_treatment rdfs:label ?possible_treatmentLabel.filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } LIMIT 6'
-     /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */
+    query= 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease  wdt:P279*'  + wikidataId + '; wdt:P924 ?possible_treatment. ?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\')?possible_treatment rdfs:label ?possible_treatmentLabel.filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } ORDER BY ASC(?diseaseLabel)'
+    
      const url = wdk.sparqlQuery(query)
      const response = await fetch(url);
      const results = await response.json();
