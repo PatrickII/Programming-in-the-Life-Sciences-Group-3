@@ -9,7 +9,7 @@ async function performQuery(wikidataId) {
 
    /*query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE { ?disease p:P279 ?statement0.?statement0 (ps:P279/(wdt:P279*))' + wikidataId +'.?disease wdt:P924 ?possible_treatment.?disease rdfs:label ?diseaseLabel. filter(lang(?diseaseLabel)=\'en\') ?possible_treatment rdfs:label ?possible_treatmentLabel.  filter(lang(?possible_treatmentLabel)=\'en\')SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". } } LIMIT 6'     complicated query*/ 
 
-   /* query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */    // this query does not manually assign labels 
+   /* query = 'SELECT DISTINCT ?disease ?diseaseLabel ?possible_treatment ?possible_treatmentLabel WHERE {?disease p:P279 ?statement0. ?statement0 (ps:P279/(wdt:P279*))'+ wikidataId +'.?disease wdt:P924 ?possible_treatment. SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }}' */    /* this query does not manually assign labels  */
     const url = wdk.sparqlQuery(query)
     const response = await fetch(url);
     const results = await response.json();
@@ -22,8 +22,8 @@ async function performQuery(wikidataId) {
    
        console.log(simpleResults);   /* to view whole arrays 
     
-      //for (let step = 0; step < 6; step++) {
-  // Runs n times, with values of step 0 through length of simpleresults -1 .
+     //for (let step = 0; step < 6; step++) {
+  /* Runs n times, with values of step 0 through length of simpleresults -1 . */
   
    for (let step = 0; step < simpleResults.length-1; step++) {
   // Runs 6 times, with values of step 0 through 5.
@@ -78,6 +78,32 @@ async function performQuery(wikidataId) {
      console.log(queryData);
     queryData=[];
 
+    await performQuery("wd:Q949302")
+    skin= JSON.stringify(queryData, undefined,0);
+    console.log(queryData);
+    queryData=[];
+
+    await performQuery("wd:Q4941552")
+    bones=JSON.stringify(queryData,undefined,0);
+    console.log(queryData);
+    queryData=[];
+
+    await performQuery("wd:Q18971535")
+    knee=JSON.stringify(queryData,undefined,0);
+    console.log(queryData);
+    queryData=[];
+
+    await performQuery("wd:Q3055380")
+    intestine=JSON.stringify(queryData,undefined,0);
+    console.log(queryData);
+    queryData=[];
+
+
+
+
+
+
+
 
 
     // all of the script.... //
@@ -106,7 +132,7 @@ async function performQuery(wikidataId) {
 
     Knee: {
         id: "wd:Q18971535",
-        content: "<b>knee</b> is very fat."
+        content: knee
     },
 
     Reproductivesystem: {
@@ -132,18 +158,18 @@ async function performQuery(wikidataId) {
 
     Skin: {
        id: "wd:Q949302",
-       content: "<b>skin </b> is scratched"
+       content: skin
 
     },
 
     Intestine: {
         id: "wd:Q3055380",
-        content: "<b>intestines </b> is scrad"
+        content: intestine
     },
 
     Bones: {
         id:"wd:Q4941552",
-        content: "<b>bones </b> are broken"
+        content: bones
 
     }
     
@@ -167,14 +193,13 @@ image.mapster(
         
         // update text depending on area selected
 
-         /*console.log(queryData) */
+         
         $('#selections').html(xref[e.key].content); 
 
 
        /* performQuery(xref[e.key].id) */
-      /*  function askStefan(){insert answer} */
+     
 
-       /*  $('#selections2').performQuery(xref[e.key].id.object);  */
     }
     
 });
