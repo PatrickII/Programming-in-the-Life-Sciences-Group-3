@@ -1,5 +1,5 @@
 # Human Body and It's Diseases - Group 3 Final Submission
-## V.0.1.0-alpha [13.10.2021]
+## V.0.1.1-alpha [13.10.2021]
 
 > This project hoped to create an interactive human body that could visualise the different human disease and their locations in the human body. It was hoped that the foundation could be laid for a website that could serve to engage with young children, given the increased distance learning an online education following the COVID-19 Pandemic.
 
