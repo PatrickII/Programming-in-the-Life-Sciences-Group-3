@@ -16,7 +16,7 @@
 This project is being submitted in an alpha stage.
 
 ## Installation
-**
+
 Please extract the contents of the zip file into one folder. Ensure that the Images folder, and the ImageMapster folder is in the same directory as the html files. This is needed to make sure that the website loads necessary images correctly. For optimal experiences, open the website in Microsoft Edge.
 Run the Website.html file first. This will take you to the home page.
 
